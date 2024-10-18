@@ -1,5 +1,6 @@
 import 'package:cozy/model/city.dart';
 import 'package:cozy/model/space.dart';
+import 'package:cozy/model/tips.dart';
 import 'package:cozy/widgets/city_card.dart';
 import 'package:cozy/widgets/space_card.dart';
 import 'package:cozy/widgets/tips_card.dart';
@@ -173,13 +174,27 @@ class HomePage extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: edge),
-                      child: const Column(
+                      child: Column(
                         children: [
-                          TipsCard(),
-                          SizedBox(
+                          TipsCard(
+                            tips: Tips(
+                              id: 1,
+                              title: 'City Guidelines',
+                              imageUrl: 'assets/tips1.png',
+                              updatedAt: '20 Apr',
+                            ),
+                          ),
+                          const SizedBox(
                             height: 20,
                           ),
-                          TipsCard(), 
+                          TipsCard(
+                            tips: Tips(
+                              id: 2,
+                              title: 'Jakarta Fairship',
+                              imageUrl: 'assets/tips2.png',
+                              updatedAt: '11 Dec',
+                            ),
+                          ),
                         ],
                       ),
                     ),
