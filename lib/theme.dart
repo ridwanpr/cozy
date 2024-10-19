@@ -6,6 +6,7 @@ Color orangeColor = const Color(0xffff9376);
 Color blackColor = const Color(0xff000000);
 Color lightColor = const Color(0xffffffff);
 Color greyColor = const Color(0xff82868e);
+Color whiteColor = const Color(0xffffffff);
 
 double edge = 24;
 
