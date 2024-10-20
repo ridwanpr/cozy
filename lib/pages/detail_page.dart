@@ -1,9 +1,39 @@
+import 'package:cozy/pages/error_page.dart';
 import 'package:cozy/theme.dart';
 import 'package:cozy/widgets/facility_item.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
+
+  @override
+  State createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  Future<void> openUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+      } else {
+        _showErrorPage();
+      }
+    } catch (e) {
+      _showErrorPage();
+    }
+  }
+
+  void _showErrorPage() {
+    if (!mounted) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ErrorPage(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -206,9 +236,16 @@ class DetailPage extends StatelessWidget {
                               'Jln. Kappan Sukses No.20\nPalembang',
                               style: greyTextStyle,
                             ),
-                            Image.asset(
-                              'assets/btn_map.png',
-                              width: 40,
+                            InkWell(
+                              onTap: () {
+                                openUrl(
+                                  'https://maps.app.goo.gl/ETuuRSF4vLrstqZX8',
+                                );
+                              },
+                              child: Image.asset(
+                                'assets/btn_map.png',
+                                width: 40,
+                              ),
                             ),
                           ],
                         ),
@@ -221,7 +258,9 @@ class DetailPage extends StatelessWidget {
                         height: 50,
                         width: MediaQuery.of(context).size.width - (2 * edge),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            openUrl('tel://+6289695869902');
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: purpleColor,
                             shape: RoundedRectangleBorder(
